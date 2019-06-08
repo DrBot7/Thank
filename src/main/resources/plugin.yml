@@ -1,0 +1,8 @@
+api-version: 1.14
+name: Thank
+version: ${project.version}
+main: org.acornmc.thank.Thank
+commands:
+  thank:
+    description: Thank a player
+    usage: /thank <player>

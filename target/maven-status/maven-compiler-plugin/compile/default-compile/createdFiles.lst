@@ -1,0 +1,5 @@
+org\acornmc\thank\Database.class
+org\acornmc\thank\CommandThank.class
+org\acornmc\thank\Thank.class
+org\acornmc\thank\SQLite.class
+org\acornmc\thank\SQLError.class

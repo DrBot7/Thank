@@ -1,0 +1,15 @@
+BaseMoney: 10.00
+# How much to give on the
+
+RepeatedThankRatio: 0.9
+# Repeated thanks from and to the same player will give a reduced amount unless this is 1.0
+
+ThankCooldown: 3600
+# Cooldown in order to use /thank again (in seconds)
+
+ThankCommands:
+  - "bcast &a%THANKER% &2just thanked &a%THANKEE%"
+
+CooldownMessage: "&cYou can not use that command for another %TIME%."
+OfflinePlayerMessage: "&cYou can not thank a player who is offline."
+CantThankSelfMessage: "&cYou can not thank yourself."
