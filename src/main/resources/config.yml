@@ -1,8 +1,8 @@
 BaseMoney: 10.00
-# How much to give on the
+# How much to give on the first thank to a player
 
 RepeatedThankRatio: 0.9
-# Repeated thanks from and to the same player will give a reduced amount unless this is 1.0
+# Repeated thanks from and to the same players will give a reduced amount unless this is 1.0 or greater
 
 ThankCooldown: 3600
 # Cooldown in order to use /thank again (in seconds)
