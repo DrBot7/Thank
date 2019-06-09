@@ -40,8 +40,8 @@ public class CommandThank implements CommandExecutor {
 
         boolean allowThankingSameIP = plugin.getConfig().getBoolean("AllowThankingSameIP");
         if (!allowThankingSameIP) {
-            InetSocketAddress thankerAddress = thanker.getAddress();
-            if (thankerAddress != null && thankerAddress.equals(thankee.getAddress())) {
+            String thankerAddress = thanker.getAddress().toString().split(":")[0];
+            if (thankerAddress != null && thankerAddress.equals(thankee.getAddress().toString().split(":")[0])) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThankSameIPMessage").replace("&", "§"));
                 return true;
             }
