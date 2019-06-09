@@ -39,17 +39,22 @@ public class CommandThank implements CommandExecutor {
         SQLite sqLite = new SQLite(thank);
         int cooldownseconds = sqLite.CooldownRemaining(thanker);
         if (cooldownseconds > 0) {
-            String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§");
-            thanker.sendMessage(cooldownMessage.replace("%TIME%", timeString(cooldownseconds)));
+            String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", timeString(cooldownseconds));
+            thanker.sendMessage(cooldownMessage);
             return true;
         }
 
-        System.out.println(cooldownseconds);
-
-        double mangifier = plugin.getConfig().getDouble("RepeatedThankRatio");
+        double magnifier = plugin.getConfig().getDouble("RepeatedThankRatio");
         int exponent = sqLite.Thankcount(thanker, thankee);
+
+        if (magnifier < 0 && exponent > 0) {
+            String cantThankSamePlayerMessage = plugin.getConfig().getString("CantThankSamePlayerMessage").replace("&", "§");
+            thanker.sendMessage(cantThankSamePlayerMessage);
+            return true;
+        }
+
         double baseMoney = plugin.getConfig().getDouble("BaseMoney");
-        double netMoney = baseMoney * Math.pow(mangifier, exponent);
+        double netMoney = baseMoney * Math.pow(magnifier, exponent);
         Thank.getEconomy().depositPlayer(thankee, netMoney);
         sqLite.addNewEntry(thanker, thankee);
         List<String> thankCommands = plugin.getConfig().getStringList("ThankCommands");

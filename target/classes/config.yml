@@ -1,8 +1,12 @@
 BaseMoney: 10.00
-# How much to give on the
+# How much to give on the first thank to a player
 
 RepeatedThankRatio: 0.9
-# Repeated thanks from and to the same player will give a reduced amount unless this is 1.0
+# >1: Thanking the same player multiple times gives more money each time
+# 1: Thanking the same player multiple times always gives BaseMoney
+# >0 and <1: Thanking the same player multiple times gives less money each time
+# 0: Thanking the same player multiple times will only run ThankCommands
+# <0: Thanking the same player multiple times will tell the player CantThankSamePlayerMessage
 
 ThankCooldown: 3600
 # Cooldown in order to use /thank again (in seconds)
@@ -13,3 +17,4 @@ ThankCommands:
 CooldownMessage: "&cYou can not use that command for another %TIME%."
 OfflinePlayerMessage: "&cYou can not thank a player who is offline."
 CantThankSelfMessage: "&cYou can not thank yourself."
+CantThankSamePlayerMessage: "&cYou can not thank the same player more than once."
