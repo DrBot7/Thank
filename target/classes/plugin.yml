@@ -1,6 +1,6 @@
 api-version: 1.14
 name: Thank
-version: 1.0.2
+version: 1.0.3-SNAPSHOT
 main: org.acornmc.thank.Thank
 commands:
   thank:

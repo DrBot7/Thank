@@ -19,16 +19,19 @@ public final class Thank extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getCommand("thank").setExecutor(new CommandThank());
+        getLogger().info("Checking for Vault...");
         if (!setupEconomy() ) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        getLogger().info("Vault found");
         setupPermissions();
         setupChat();
         getLogger().info("Connecting to database...");
         this.db = new SQLite(this);
         this.db.load();
+        getLogger().info("Connected to database");
     }
 
     @Override
