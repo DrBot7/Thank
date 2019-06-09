@@ -6,6 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import java.net.InetSocketAddress;
 import java.util.List;
 
 public class CommandThank implements CommandExecutor {
@@ -34,6 +36,15 @@ public class CommandThank implements CommandExecutor {
         if (thanker.getUniqueId().equals(thankee.getUniqueId())) {
             thanker.sendMessage(plugin.getConfig().getString("CantThankSelfMessage").replace("&", "§"));
             return true;
+        }
+
+        boolean allowThankingSameIP = plugin.getConfig().getBoolean("AllowThankingSameIP");
+        if (!allowThankingSameIP) {
+            InetSocketAddress thankerAddress = thanker.getAddress();
+            if (thankerAddress != null && thankerAddress.equals(thankee.getAddress())) {
+                thanker.sendMessage(plugin.getConfig().getString("CantThankSameIPMessage").replace("&", "§"));
+                return true;
+            }
         }
 
         SQLite sqLite = new SQLite(thank);

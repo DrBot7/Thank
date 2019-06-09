@@ -14,7 +14,10 @@ ThankCooldown: 3600
 ThankCommands:
   - "bcast &a%THANKER% &2just thanked &a%THANKEE%"
 
+AllowThankingSameIP: false
+
 CooldownMessage: "&cYou can not use that command for another %TIME%."
-OfflinePlayerMessage: "&cYou can not thank a player who is offline."
+CantThankOfflinePlayerMessage: "&cYou can not thank a player who is offline."
 CantThankSelfMessage: "&cYou can not thank yourself."
 CantThankSamePlayerMessage: "&cYou can not thank the same player more than once."
+CantThankSameIPMessage: "&cYou can not thank that player because they share the same IP as you."
