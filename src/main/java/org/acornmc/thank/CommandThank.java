@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import java.net.InetSocketAddress;
 import java.util.List;
 
 public class CommandThank implements CommandExecutor {
@@ -48,6 +47,15 @@ public class CommandThank implements CommandExecutor {
         }
 
         SQLite sqLite = new SQLite(thank);
+        boolean allowThankingCooldownPlayers = plugin.getConfig().getBoolean("AllowThankingCooldownPlayers");
+        if (!allowThankingCooldownPlayers) {
+            int thankeeCooldown = sqLite.CooldownRemaining(thankee);
+            if (thankeeCooldown > 0) {
+                thanker.sendMessage(plugin.getConfig().getString("CantThankCooldownMessage").replace("&", "§"));
+                return true;
+            }
+        }
+
         int cooldownseconds = sqLite.CooldownRemaining(thanker);
         if (cooldownseconds > 0) {
             String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", timeString(cooldownseconds));

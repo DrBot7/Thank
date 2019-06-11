@@ -1,7 +1,8 @@
 api-version: 1.14
 name: Thank
-version: 1.0.3-SNAPSHOT
+version: 1.0.3
 main: org.acornmc.thank.Thank
+author: DrBot
 commands:
   thank:
     description: Thank a player
