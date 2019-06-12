@@ -121,6 +121,40 @@ public abstract class Database {
         }
     }
 
+    public boolean Thank4ThankDetected(String thankerUuid, String thankeeUuid) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs;
+        int cooldown = plugin.getConfig().getInt("ThankCooldown");
+        int cooldownIfAnyEntryIsNewer = now - 1000 * cooldown;
+        try {
+            conn = getSQLConnection();
+            ps = conn.prepareStatement("SELECT thankee FROM " + table + " WHERE thanker='" + thankeeUuid +"' AND time>" + cooldownIfAnyEntryIsNewer + ";");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String thankee = rs.getString("thankee");
+                if (thankee.equals(thankerUuid)) {
+                    return true;
+                } else {
+                    return Thank4ThankDetected(thankerUuid, thankee);
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            plugin.getLogger().log(Level.SEVERE, SQLError.sqlConnectionExecute(), ex);
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException ex) {
+                plugin.getLogger().log(Level.SEVERE, SQLError.sqlConnectionClose(), ex);
+            }
+        }
+        return false;
+    }
+
     public void close(PreparedStatement ps,ResultSet rs){
         try {
             if (ps != null) {

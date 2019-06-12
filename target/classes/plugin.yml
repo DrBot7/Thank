@@ -1,6 +1,6 @@
 api-version: 1.14
 name: Thank
-version: 1.0.3
+version: 1.0.4
 main: org.acornmc.thank.Thank
 author: DrBot
 commands:

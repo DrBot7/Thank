@@ -56,6 +56,17 @@ public class CommandThank implements CommandExecutor {
             }
         }
 
+        boolean allowThank4Thank = plugin.getConfig().getBoolean("AllowThank4Thank");
+        if (!allowThank4Thank) {
+            String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
+            String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
+            boolean Thank4Thank = sqLite.Thank4ThankDetected(thankerUuid, thankeeUuid);
+            if (Thank4Thank) {
+                thanker.sendMessage(plugin.getConfig().getString("CantThank4ThankMessage").replace("&", "§"));
+                return true;
+            }
+        }
+
         int cooldownseconds = sqLite.CooldownRemaining(thanker);
         if (cooldownseconds > 0) {
             String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", timeString(cooldownseconds));
@@ -84,6 +95,7 @@ public class CommandThank implements CommandExecutor {
         }
         return true;
     }
+
     public String timeString(int totalSecs) {
         int hours = totalSecs / 3600;
         int minutes = (totalSecs % 3600) / 60;
