@@ -18,10 +18,10 @@ AllowThankingSameIP: false
 AllowThankingCooldownPlayers: true
 AllowThank4Thank: false
 
-CooldownMessage: "&cYou can not use that command for another %TIME%."
-CantThankOfflinePlayerMessage: "&cYou can not thank a player who is offline."
-CantThankSelfMessage: "&cYou can not thank yourself."
-CantThankSamePlayerMessage: "&cYou can not thank the same player more than once."
-CantThankSameIPMessage: "&cYou can not thank that player because they share the same IP as you."
-CantThankCooldownMessage: "&cYou can not thank a player who recently thanked a player."
-CantThank4ThankMessage: "&cYou can not thank that player because thank4thank has been detected."
+CooldownMessage: "&cYou cannot use that command for another %TIME%."
+CantThankOfflinePlayerMessage: "&cYou cannot thank a player who is offline."
+CantThankSelfMessage: "&cYou cannot thank yourself."
+CantThankSamePlayerMessage: "&cYou cannot thank the same player more than once."
+CantThankSameIPMessage: "&cYou cannot thank that player because they share the same IP as you."
+CantThankCooldownMessage: "&cYou cannot thank a player who recently thanked a player."
+CantThank4ThankMessage: "&cYou cannot thank that player because thank4thank has been detected."
