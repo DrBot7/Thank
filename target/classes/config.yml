@@ -12,13 +12,14 @@ ThankCooldown: 3600
 # Cooldown in order to use /thank again (in seconds)
 
 ThankCommands:
-  - "bcast &a%THANKER% &2just thanked &a%THANKEE%"
+  - "bcast &a%THANKER% &2just thanked &a%THANKEE%&2%REASON%."
 
-AllowThankingSameIP: false
-AllowThankingCooldownPlayers: true
-AllowThank4Thank: false
+DenyThankingSameIP: true
+DenyThankingCooldownPlayers: false
+DenyThank4Thank: true
 
 CooldownMessage: "&cYou cannot use that command for another %TIME%."
+NoPermissionMessage: "&cYou do not have permission to use that command."
 CantThankOfflinePlayerMessage: "&cYou cannot thank a player who is offline."
 CantThankSelfMessage: "&cYou cannot thank yourself."
 CantThankSamePlayerMessage: "&cYou cannot thank the same player more than once."

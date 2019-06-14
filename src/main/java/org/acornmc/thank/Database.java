@@ -125,6 +125,7 @@ public abstract class Database {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
+        now = new Date().hashCode();
         int cooldown = plugin.getConfig().getInt("ThankCooldown");
         int cooldownIfAnyEntryIsNewer = now - 1000 * cooldown;
         try {
@@ -135,11 +136,9 @@ public abstract class Database {
                 String thankee = rs.getString("thankee");
                 if (thankee.equals(thankerUuid)) {
                     return true;
-                } else {
-                    return Thank4ThankDetected(thankerUuid, thankee);
                 }
+                return Thank4ThankDetected(thankerUuid, thankee);
             }
-            return false;
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, SQLError.sqlConnectionExecute(), ex);
         } finally {

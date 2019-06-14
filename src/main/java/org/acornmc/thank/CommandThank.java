@@ -16,19 +16,26 @@ public class CommandThank implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (!(sender instanceof Player)) {
             System.out.println("Only players can use /thank");
             return true;
         }
 
-        if (args.length != 1) {
+        if (args.length == 0) {
             return false;
         }
 
         Player thanker = (Player) sender;
         Player thankee = Bukkit.getPlayer(args[0]);
+
+        if (!thanker.hasPermission("thank.thank")) {
+            thanker.sendMessage(plugin.getConfig().getString("NoPermissionMessage").replace("&", "§"));
+            return true;
+        }
+
         if (thankee == null) {
-            thanker.sendMessage(plugin.getConfig().getString("OfflinePlayerMessage").replace("&", "§"));
+            thanker.sendMessage(plugin.getConfig().getString("CantThankOfflinePlayerMessage").replace("&", "§"));
             return true;
         }
 
@@ -37,8 +44,8 @@ public class CommandThank implements CommandExecutor {
             return true;
         }
 
-        boolean allowThankingSameIP = plugin.getConfig().getBoolean("AllowThankingSameIP");
-        if (!allowThankingSameIP) {
+        boolean denyThankingSameIP = plugin.getConfig().getBoolean("DenyThankingSameIP");
+        if (denyThankingSameIP) {
             String thankerAddress = thanker.getAddress().toString().split(":")[0];
             if (thankerAddress != null && thankerAddress.equals(thankee.getAddress().toString().split(":")[0])) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThankSameIPMessage").replace("&", "§"));
@@ -47,8 +54,8 @@ public class CommandThank implements CommandExecutor {
         }
 
         SQLite sqLite = new SQLite(thank);
-        boolean allowThankingCooldownPlayers = plugin.getConfig().getBoolean("AllowThankingCooldownPlayers");
-        if (!allowThankingCooldownPlayers) {
+        boolean denyThankingCooldownPlayers = plugin.getConfig().getBoolean("DenyThankingCooldownPlayers");
+        if (denyThankingCooldownPlayers) {
             int thankeeCooldown = sqLite.CooldownRemaining(thankee);
             if (thankeeCooldown > 0) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThankCooldownMessage").replace("&", "§"));
@@ -56,8 +63,8 @@ public class CommandThank implements CommandExecutor {
             }
         }
 
-        boolean allowThank4Thank = plugin.getConfig().getBoolean("AllowThank4Thank");
-        if (!allowThank4Thank) {
+        boolean denyThank4Thank = plugin.getConfig().getBoolean("DenyThank4Thank");
+        if (denyThank4Thank) {
             String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
             String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
             boolean Thank4Thank = sqLite.Thank4ThankDetected(thankerUuid, thankeeUuid);
@@ -88,10 +95,20 @@ public class CommandThank implements CommandExecutor {
         Thank.getEconomy().depositPlayer(thankee, netMoney);
         sqLite.addNewEntry(thanker, thankee);
         List<String> thankCommands = plugin.getConfig().getStringList("ThankCommands");
+
+        String reason = "";
+        if (thanker.hasPermission("thank.thank.reason") && args.length >= 3 && args[1].equalsIgnoreCase("for")) {
+            reason = " for";
+            for (int i = 2; i < args.length; i++) {
+                reason += " " + args[i];
+            }
+        }
+
         for (int i = 0; i < thankCommands.size(); i++) {
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), thankCommands.get(i)
                     .replace("%THANKER%", thanker.getName())
-                    .replace("%THANKEE%", thankee.getName()));
+                    .replace("%THANKEE%", thankee.getName())
+                    .replace("%REASON%", reason));
         }
         return true;
     }
