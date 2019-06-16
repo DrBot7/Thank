@@ -7,3 +7,6 @@ commands:
   thank:
     description: Thank a player
     usage: /thank <player>
+  thankcount:
+    description: tells you how many times you have used the thank command
+    usage: /thankcount <params>

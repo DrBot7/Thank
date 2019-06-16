@@ -54,9 +54,11 @@ public class CommandThank implements CommandExecutor {
         }
 
         SQLite sqLite = new SQLite(thank);
+        String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
+        String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
         boolean denyThankingCooldownPlayers = plugin.getConfig().getBoolean("DenyThankingCooldownPlayers");
         if (denyThankingCooldownPlayers) {
-            int thankeeCooldown = sqLite.CooldownRemaining(thankee);
+            int thankeeCooldown = sqLite.CooldownRemaining(thankeeUuid);
             if (thankeeCooldown > 0) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThankCooldownMessage").replace("&", "§"));
                 return true;
@@ -65,8 +67,6 @@ public class CommandThank implements CommandExecutor {
 
         boolean denyThank4Thank = plugin.getConfig().getBoolean("DenyThank4Thank");
         if (denyThank4Thank) {
-            String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
-            String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
             boolean Thank4Thank = sqLite.Thank4ThankDetected(thankerUuid, thankeeUuid);
             if (Thank4Thank) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThank4ThankMessage").replace("&", "§"));
@@ -74,7 +74,7 @@ public class CommandThank implements CommandExecutor {
             }
         }
 
-        int cooldownseconds = sqLite.CooldownRemaining(thanker);
+        int cooldownseconds = sqLite.CooldownRemaining(thankerUuid);
         if (cooldownseconds > 0) {
             String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", timeString(cooldownseconds));
             thanker.sendMessage(cooldownMessage);
@@ -82,7 +82,7 @@ public class CommandThank implements CommandExecutor {
         }
 
         double magnifier = plugin.getConfig().getDouble("RepeatedThankRatio");
-        int exponent = sqLite.Thankcount(thanker, thankee);
+        int exponent = sqLite.Thankcount(thankerUuid, thankeeUuid);
 
         if (magnifier < 0 && exponent > 0) {
             String cantThankSamePlayerMessage = plugin.getConfig().getString("CantThankSamePlayerMessage").replace("&", "§");
@@ -93,13 +93,12 @@ public class CommandThank implements CommandExecutor {
         double baseMoney = plugin.getConfig().getDouble("BaseMoney");
         double netMoney = baseMoney * Math.pow(magnifier, exponent);
         Thank.getEconomy().depositPlayer(thankee, netMoney);
-        sqLite.addNewEntry(thanker, thankee);
+        sqLite.addNewEntry(thankerUuid, thankeeUuid);
         List<String> thankCommands = plugin.getConfig().getStringList("ThankCommands");
 
         String reason = "";
         if (thanker.hasPermission("thank.thank.reason") && args.length >= 3 && args[1].equalsIgnoreCase("for")) {
-            reason = " for";
-            for (int i = 2; i < args.length; i++) {
+            for (int i = 1; i < args.length; i++) {
                 reason += " " + args[i];
             }
         }

@@ -1,8 +1,5 @@
 package org.acornmc.thank;
 
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,15 +31,19 @@ public abstract class Database {
         }
     }
 
-    public int Thankcount(Player thanker, Player thankee) {
+    public int Thankcount(String thankerUuid, String thankeeUuid) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
-        String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
-        String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE thanker = '" + thankerUuid + "' AND thankee = '" + thankeeUuid + "';");
+            if (thankeeUuid.length() > 0 && thankerUuid.length() > 0) {
+                ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE thanker = '" + thankerUuid + "' AND thankee = '" + thankeeUuid + "';");
+            } else if (thankerUuid.length() > 0) {
+                ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE thanker = '" + thankerUuid + "';");
+            } else {
+                ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE thankee = '" + thankeeUuid + "';");
+            }
             rs = ps.executeQuery();
             int thankCount = 0;
             while (rs.next()){
@@ -64,12 +65,11 @@ public abstract class Database {
         return 0;
     }
 
-    public int CooldownRemaining(Player thanker) {
+    public int CooldownRemaining(String thankerUuid) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
         try {
-            String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
             conn = getSQLConnection();
             now = new Date().hashCode();
             int cooldown = plugin.getConfig().getInt("ThankCooldown");
@@ -97,14 +97,12 @@ public abstract class Database {
         return 0;
     }
 
-    public void addNewEntry(Player thanker, Player thankee) {
+    public void addNewEntry(String thankerUuid, String thankeeUuid) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = getSQLConnection();
             now = new Date().hashCode();
-            String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
-            String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
             ps = conn.prepareStatement("INSERT INTO thanks (thanker, thankee, time) VALUES ('" + thankerUuid + "', '" + thankeeUuid + "', " + now + ");");
             ps.executeUpdate();
         } catch (SQLException ex) {

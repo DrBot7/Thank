@@ -1,9 +1,12 @@
 api-version: 1.13
 name: Thank
-version: 1.1
+version: 1.2-SNAPSHOT
 main: org.acornmc.thank.Thank
 author: DrBot
 commands:
   thank:
     description: Thank a player
     usage: /thank <player>
+  thankcount:
+    description: tells you how many times you have used the thank command
+    usage: /thankcount <params>

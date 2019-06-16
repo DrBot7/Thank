@@ -20,6 +20,11 @@ DenyThank4Thank: true
 
 CooldownMessage: "&cYou cannot use that command for another %TIME%."
 NoPermissionMessage: "&cYou do not have permission to use that command."
+
+ThankcountFromMessage: "&a%THANKER% has thanked %COUNT% times."
+ThankcountToMessage: "&a%THANKEE% has been thanked %COUNT% times."
+ThankcountFromToMessage: "&a%THANKER% has thanked %THANKEE% %COUNT% times."
+
 CantThankOfflinePlayerMessage: "&cYou cannot thank a player who is offline."
 CantThankSelfMessage: "&cYou cannot thank yourself."
 CantThankSamePlayerMessage: "&cYou cannot thank the same player more than once."
