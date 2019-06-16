@@ -6,8 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
-import java.util.logging.Logger;
-
 public class CommandThankcount implements CommandExecutor {
     Plugin plugin = Thank.getPlugin(Thank.class);
     Thank thank = Thank.getPlugin(Thank.class);

@@ -20,6 +20,7 @@ DenyThank4Thank: true
 
 CooldownMessage: "&cYou cannot use that command for another %TIME%."
 NoPermissionMessage: "&cYou do not have permission to use that command."
+RemindMessage: "&aIf you were just helped, don't forget to /thank the player who helped you."
 
 ThankcountFromMessage: "&a%THANKER% has thanked %COUNT% times."
 ThankcountToMessage: "&a%THANKEE% has been thanked %COUNT% times."

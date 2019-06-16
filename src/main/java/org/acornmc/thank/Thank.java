@@ -31,6 +31,7 @@ public final class Thank extends JavaPlugin {
         this.db = new SQLite(this);
         this.db.load();
         getLogger().info("Connected to database");
+        this.getServer().getPluginManager().registerEvents(new EventPlayerChat(), this);
         getCommand("thank").setExecutor(new CommandThank());
         getCommand("thankcount").setExecutor(new CommandThankcount());
     }
