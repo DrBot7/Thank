@@ -29,7 +29,7 @@ public class CommandThankcount implements CommandExecutor {
                 thankeePlayer = Bukkit.getOfflinePlayer(to).getUniqueId().toString().replace("-", "");
             }
         }
-        String count = String.valueOf(sqLite.Thankcount(thankerPlayer, thankeePlayer));
+        String count = String.valueOf(sqLite.thankcount(thankerPlayer, thankeePlayer));
         if (from.length() > 0 && to.length() > 0) {
             sender.sendMessage(plugin.getConfig().getString("ThankcountFromToMessage")
                     .replace("&", "§")

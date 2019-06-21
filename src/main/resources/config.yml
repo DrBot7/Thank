@@ -22,10 +22,18 @@ CooldownMessage: "&cYou cannot use that command for another %TIME%."
 NoPermissionMessage: "&cYou do not have permission to use that command."
 RemindMessage: "&aIf you were just helped, don't forget to /thank the player who helped you."
 
+ThankbanNonexistingPlayerMessage: "&c%TARGET% has never joined the server."
+ThankbanSuccessfulMessage: "&a%TARGET% has been thankbanned for %TIME%."
+
+ThanklastNonexistingPlayerMessage: "&c%TARGET% has never joined the server."
+ThanklastPlayerNeverThankedMessage: "&c%TARGET% has never thanked anyone."
+ThanklastSuccessfulMessage: "&a%TARGET% last thanked %TIME% ago."
+
 ThankcountFromMessage: "&a%THANKER% has thanked %COUNT% times."
 ThankcountToMessage: "&a%THANKEE% has been thanked %COUNT% times."
 ThankcountFromToMessage: "&a%THANKER% has thanked %THANKEE% %COUNT% times."
 
+CantThankBannedPlayerMessage: "&cYou cannot thank that player because they are thankbanned."
 CantThankOfflinePlayerMessage: "&cYou cannot thank a player who is offline."
 CantThankSelfMessage: "&cYou cannot thank yourself."
 CantThankSamePlayerMessage: "&cYou cannot thank the same player more than once."

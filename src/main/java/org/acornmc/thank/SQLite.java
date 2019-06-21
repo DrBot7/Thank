@@ -16,10 +16,14 @@ public class SQLite extends Database{
         dbname = plugin.getConfig().getString("SQLite.Filename", "thanks");
     }
 
-    public String SQLiteCreateTokensTable = "CREATE TABLE IF NOT EXISTS thanks (" +
+    public String SQLiteCreateThanksTable = "CREATE TABLE IF NOT EXISTS thanks (" +
             "`thanker` CHAR(32) NOT NULL," +
             "`thankee` CHAR(32) NOT NULL," +
             "`time` INTEGER NOT NULL);";
+
+    public String SQLiteCreateBansTable = "CREATE TABLE IF NOT EXISTS bans (" +
+            "`uuid` CHAR(32) NOT NULL," +
+            "`bannedUntil` INTEGER NOT NULL,";
 
     public Connection getSQLConnection() {
         File dataFolder = new File(plugin.getDataFolder(), dbname+".db");
@@ -51,11 +55,21 @@ public class SQLite extends Database{
         connection = getSQLConnection();
         try {
             Statement s = connection.createStatement();
-            s.executeUpdate(SQLiteCreateTokensTable);
+            s.executeUpdate(SQLiteCreateThanksTable);
             s.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        initialize();
+        initializeThanks();
+
+        connection = getSQLConnection();
+        try {
+            Statement s = connection.createStatement();
+            s.executeUpdate(SQLiteCreateBansTable);
+            s.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        initializeBans();
     }
 }

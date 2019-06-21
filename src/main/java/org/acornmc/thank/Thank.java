@@ -32,8 +32,12 @@ public final class Thank extends JavaPlugin {
         this.db.load();
         getLogger().info("Connected to database");
         this.getServer().getPluginManager().registerEvents(new EventPlayerChat(), this);
+
         getCommand("thank").setExecutor(new CommandThank());
         getCommand("thankcount").setExecutor(new CommandThankcount());
+        getCommand("thanklast").setExecutor(new CommandThanklast());
+        getCommand("thankban").setExecutor(new CommandThankban());
+        getCommand("thanktop").setExecutor(new CommandThanktop());
     }
 
     @Override
@@ -79,5 +83,18 @@ public final class Thank extends JavaPlugin {
 
     public Database getRDatabase() {
         return this.db;
+    }
+
+    public String timeString(int totalSecs) {
+        int hours = totalSecs / 3600;
+        int minutes = (totalSecs % 3600) / 60;
+        int seconds = totalSecs % 60;
+        if (hours > 0) {
+            return String.format("%02dh %02dm %02ds", hours, minutes, seconds);
+        } else if (minutes > 0) {
+            return String.format("%02dm %02ds", minutes, seconds);
+        } else {
+            return String.format("%02ds", seconds);
+        }
     }
 }

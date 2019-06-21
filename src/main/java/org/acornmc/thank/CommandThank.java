@@ -56,9 +56,15 @@ public class CommandThank implements CommandExecutor {
         SQLite sqLite = new SQLite(thank);
         String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
         String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
+
+        if (sqLite.checkThankbanned(thankeeUuid)) {
+            thanker.sendMessage(plugin.getConfig().getString("CantThankBannedPlayerMessage").replace("&", "§"));
+            return true;
+        }
+
         boolean denyThankingCooldownPlayers = plugin.getConfig().getBoolean("DenyThankingCooldownPlayers");
         if (denyThankingCooldownPlayers) {
-            int thankeeCooldown = sqLite.CooldownRemaining(thankeeUuid);
+            int thankeeCooldown = sqLite.cooldownRemaining(thankeeUuid);
             if (thankeeCooldown > 0) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThankCooldownMessage").replace("&", "§"));
                 return true;
@@ -67,22 +73,22 @@ public class CommandThank implements CommandExecutor {
 
         boolean denyThank4Thank = plugin.getConfig().getBoolean("DenyThank4Thank");
         if (denyThank4Thank) {
-            boolean Thank4Thank = sqLite.Thank4ThankDetected(thankerUuid, thankeeUuid);
+            boolean Thank4Thank = sqLite.thank4ThankDetected(thankerUuid, thankeeUuid);
             if (Thank4Thank) {
                 thanker.sendMessage(plugin.getConfig().getString("CantThank4ThankMessage").replace("&", "§"));
                 return true;
             }
         }
 
-        int cooldownseconds = sqLite.CooldownRemaining(thankerUuid);
+        int cooldownseconds = sqLite.cooldownRemaining(thankerUuid);
         if (cooldownseconds > 0) {
-            String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", timeString(cooldownseconds));
+            String cooldownMessage = plugin.getConfig().getString("CooldownMessage").replace("&", "§").replace("%TIME%", thank.timeString(cooldownseconds));
             thanker.sendMessage(cooldownMessage);
             return true;
         }
 
         double magnifier = plugin.getConfig().getDouble("RepeatedThankRatio");
-        int exponent = sqLite.Thankcount(thankerUuid, thankeeUuid);
+        int exponent = sqLite.thankcount(thankerUuid, thankeeUuid);
 
         if (magnifier < 0 && exponent > 0) {
             String cantThankSamePlayerMessage = plugin.getConfig().getString("CantThankSamePlayerMessage").replace("&", "§");
@@ -93,7 +99,7 @@ public class CommandThank implements CommandExecutor {
         double baseMoney = plugin.getConfig().getDouble("BaseMoney");
         double netMoney = baseMoney * Math.pow(magnifier, exponent);
         Thank.getEconomy().depositPlayer(thankee, netMoney);
-        sqLite.addNewEntry(thankerUuid, thankeeUuid);
+        sqLite.addNewThanksEntry(thankerUuid, thankeeUuid);
         List<String> thankCommands = plugin.getConfig().getStringList("ThankCommands");
 
         String reason = "";
@@ -110,18 +116,5 @@ public class CommandThank implements CommandExecutor {
                     .replace("%REASON%", reason));
         }
         return true;
-    }
-
-    public String timeString(int totalSecs) {
-        int hours = totalSecs / 3600;
-        int minutes = (totalSecs % 3600) / 60;
-        int seconds = totalSecs % 60;
-        if (hours > 0) {
-            return String.format("%02dh %02dm %02ds", hours, minutes, seconds);
-        } else if (minutes > 0) {
-            return String.format("%02dm %02ds", minutes, seconds);
-        } else {
-            return String.format("%02ds", seconds);
-        }
     }
 }
