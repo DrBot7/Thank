@@ -37,7 +37,6 @@ public final class Thank extends JavaPlugin {
         getCommand("thankcount").setExecutor(new CommandThankcount());
         getCommand("thanklast").setExecutor(new CommandThanklast());
         getCommand("thankban").setExecutor(new CommandThankban());
-        getCommand("thanktop").setExecutor(new CommandThanktop());
     }
 
     @Override

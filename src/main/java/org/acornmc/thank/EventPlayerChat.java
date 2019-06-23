@@ -13,7 +13,7 @@ public class EventPlayerChat implements Listener {
     @EventHandler
     public void EventPlayerChat(AsyncPlayerChatEvent event) {
         String msg = event.getMessage().toLowerCase();
-        if (event.getPlayer().hasPermission("thank.thank") && event.getPlayer().hasPermission("thank.thank.remind") && msg.startsWith("ty") || msg.contains(" ty")|| msg.contains("thanks") || msg.contains("thank you")|| msg.contains("thx")) {
+        if (event.getPlayer().hasPermission("thank.thank") && event.getPlayer().hasPermission("thank.thank.remind") && (msg.startsWith("ty") || msg.contains(" ty") || msg.contains("thanks") || msg.contains("thank you") || msg.contains("thx"))) {
             SQLite sqLite = new SQLite(thank);
             int cooldown = sqLite.cooldownRemaining(event.getPlayer().getUniqueId().toString().replace("-", ""));
             if (cooldown == 0) {

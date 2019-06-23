@@ -23,7 +23,7 @@ public class SQLite extends Database{
 
     public String SQLiteCreateBansTable = "CREATE TABLE IF NOT EXISTS bans (" +
             "`uuid` CHAR(32) NOT NULL," +
-            "`bannedUntil` INTEGER NOT NULL,";
+            "`time` INTEGER NOT NULL);";
 
     public Connection getSQLConnection() {
         File dataFolder = new File(plugin.getDataFolder(), dbname+".db");

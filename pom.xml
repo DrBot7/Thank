@@ -6,7 +6,7 @@
 
     <groupId>org.acornmc</groupId>
     <artifactId>thank</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
 
     <name>Thank</name>

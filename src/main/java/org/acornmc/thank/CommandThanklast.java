@@ -39,7 +39,7 @@ public class CommandThanklast implements CommandExecutor {
         }
 
         int now = new Date().hashCode();
-        String lastThankTime = thank.timeString(now - thanklast);
+        String lastThankTime = thank.timeString((now - thanklast)/1000);
         sender.sendMessage(plugin.getConfig().getString("ThanklastSuccessfulMessage").replace("&", "§").replace("%TIME%", lastThankTime).replace("%TARGET%", args[0]));
         return true;
     }

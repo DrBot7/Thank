@@ -28,11 +28,16 @@ public class CommandThankban implements CommandExecutor {
         }
 
         String targetUuid = target.getUniqueId().toString().replace("-", "");
-        int minutes = Integer.parseInt(args[1]);
-        SQLite sqLite = new SQLite(thank);
-        sqLite.addNewThankbanEntry(targetUuid, minutes);
-        sender.sendMessage(plugin.getConfig().getString("ThankbanSuccessfulMessage").replace("&", "§").replace("%TARGET%", args[0]).replace("%TIME%", args[1] + "m"));
+        int minutes;
+        try {
+            minutes = Integer.parseInt(args[1]);
+            SQLite sqLite = new SQLite(thank);
+            sqLite.addNewThankbanEntry(targetUuid, minutes);
+            sender.sendMessage(plugin.getConfig().getString("ThankbanSuccessfulMessage").replace("&", "§").replace("%TARGET%", args[0]).replace("%TIME%", args[1] + "m"));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
 
-        return true;
     }
 }

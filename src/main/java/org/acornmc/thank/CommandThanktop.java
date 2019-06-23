@@ -14,6 +14,12 @@ public class CommandThanktop implements CommandExecutor {
             sender.sendMessage(plugin.getConfig().getString("NoPermissionMessage").replace("&", "§"));
             return true;
         }
+
+        if (args.length != 1) {
+            return false;
+        }
+
+
         return true;
     }
 }

@@ -10,7 +10,6 @@ import java.util.logging.Level;
 public abstract class Database {
     Thank plugin;
     Connection connection;
-    int now;
     public abstract Connection getSQLConnection();
     public abstract void load();
 
@@ -20,7 +19,6 @@ public abstract class Database {
 
     public void initializeThanks(){
         connection = getSQLConnection();
-
         try{
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM thanks");
             ResultSet rs = ps.executeQuery();
@@ -29,9 +27,9 @@ public abstract class Database {
             plugin.getLogger().log(Level.SEVERE, "Unable to retrieve connection", ex);
         }
     }
+
     public void initializeBans(){
         connection = getSQLConnection();
-
         try{
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM bans");
             ResultSet rs = ps.executeQuery();
@@ -81,7 +79,7 @@ public abstract class Database {
         ResultSet rs;
         try {
             conn = getSQLConnection();
-            now = new Date().hashCode();
+            int now = new Date().hashCode();
             int cooldown = plugin.getConfig().getInt("ThankCooldown");
             int cooldownIfAnyEntryIsNewer = now - 1000 * cooldown;
             ps = conn.prepareStatement("SELECT * FROM thanks WHERE thanker='" + thankerUuid +"' AND time>" + cooldownIfAnyEntryIsNewer + ";");
@@ -140,7 +138,7 @@ public abstract class Database {
         PreparedStatement ps = null;
         try {
             conn = getSQLConnection();
-            now = new Date().hashCode();
+            int now = new Date().hashCode();
             ps = conn.prepareStatement("INSERT INTO thanks (thanker, thankee, time) VALUES ('" + thankerUuid + "', '" + thankeeUuid + "', " + now + ");");
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -161,7 +159,7 @@ public abstract class Database {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
-        now = new Date().hashCode();
+        int now = new Date().hashCode();
         int cooldown = plugin.getConfig().getInt("ThankCooldown");
         int cooldownIfAnyEntryIsNewer = now - 1000 * cooldown;
         try {
@@ -198,8 +196,8 @@ public abstract class Database {
             ps = conn.prepareStatement("DELETE FROM bans WHERE uuid='" + target + "';");
             ps.executeUpdate();
 
-            now = new Date().hashCode();
-            ps = conn.prepareStatement("INSERT INTO bans (uuid, time) VALUES ('" + target + "', '" + (now + minutes*1000*60) + ");");
+            int now = new Date().hashCode();
+            ps = conn.prepareStatement("INSERT INTO bans (uuid, time) VALUES ('" + target + "', " + (now + minutes*1000*60) + ");");
             ps.executeUpdate();
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, SQLError.sqlConnectionExecute(), ex);
