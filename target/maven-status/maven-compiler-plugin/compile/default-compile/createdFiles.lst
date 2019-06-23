@@ -1,7 +1,10 @@
 org\acornmc\thank\Database.class
 org\acornmc\thank\CommandThank.class
 org\acornmc\thank\Thank.class
+org\acornmc\thank\CommandThankban.class
 org\acornmc\thank\SQLite.class
 org\acornmc\thank\CommandThankcount.class
+org\acornmc\thank\CommandThanktop.class
+org\acornmc\thank\CommandThanklast.class
 org\acornmc\thank\EventPlayerChat.class
 org\acornmc\thank\SQLError.class

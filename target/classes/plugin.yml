@@ -1,6 +1,6 @@
 api-version: 1.13
 name: Thank
-version: 1.2.1
+version: 1.3-SNAPSHOT
 main: org.acornmc.thank.Thank
 author: DrBot
 commands:
@@ -10,3 +10,12 @@ commands:
   thankcount:
     description: Tells you how many times you have used the thank command
     usage: /thankcount <params>
+  thanktop:
+    description: Leaderboards for thanking
+    usage: /thanktop <days>
+  thanklast:
+    description: Last thank
+    usage: /thanklast <player>
+  thankban:
+    description: Prevents player from being thanked
+    usage: /thankban <player> <minutes>

@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04b38b4b-1f88-44e8-9b85-5cfd9f38b8a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThankban.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThanklast.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThanktop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThankcount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/CommandThankcount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/SQLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/SQLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/Thank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/acornmc/thank/Thank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/original-thank-1.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/thank-1.2.1.jar" beforeDir="false" />
-    </list>
+    <list default="true" id="04b38b4b-1f88-44e8-9b85-5cfd9f38b8a8" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +13,7 @@
     <session id="-778354014">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="16" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.11" value="3" />
           <entry key="project.open.time.12" value="1" />
@@ -258,9 +243,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="-9" />
     <option name="width" value="1935" />
-    <option name="height" value="1038" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -329,7 +314,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561105080163" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561254021201" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -388,7 +373,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="0" width="1548" height="830" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1922043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
