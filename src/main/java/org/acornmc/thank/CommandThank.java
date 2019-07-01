@@ -54,8 +54,8 @@ public class CommandThank implements CommandExecutor {
         }
 
         SQLite sqLite = new SQLite(thank);
-        String thankerUuid = thanker.getUniqueId().toString().replace("-", "");
-        String thankeeUuid = thankee.getUniqueId().toString().replace("-", "");
+        String thankerUuid = thanker.getUniqueId().toString();
+        String thankeeUuid = thankee.getUniqueId().toString();
 
         if (sqLite.checkThankbanned(thankeeUuid)) {
             thanker.sendMessage(plugin.getConfig().getString("CantThankBannedPlayerMessage").replace("&", "§"));

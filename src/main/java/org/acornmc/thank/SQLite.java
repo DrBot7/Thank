@@ -17,12 +17,12 @@ public class SQLite extends Database{
     }
 
     public String SQLiteCreateThanksTable = "CREATE TABLE IF NOT EXISTS thanks (" +
-            "`thanker` CHAR(32) NOT NULL," +
-            "`thankee` CHAR(32) NOT NULL," +
+            "`thanker` CHAR(36) NOT NULL," +
+            "`thankee` CHAR(36) NOT NULL," +
             "`time` INTEGER NOT NULL);";
 
     public String SQLiteCreateBansTable = "CREATE TABLE IF NOT EXISTS bans (" +
-            "`uuid` CHAR(32) NOT NULL," +
+            "`uuid` CHAR(36) NOT NULL," +
             "`time` INTEGER NOT NULL);";
 
     public Connection getSQLConnection() {

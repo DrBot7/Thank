@@ -27,7 +27,7 @@ public class CommandThankban implements CommandExecutor {
             return true;
         }
 
-        String targetUuid = target.getUniqueId().toString().replace("-", "");
+        String targetUuid = target.getUniqueId().toString();
         int minutes;
         try {
             minutes = Integer.parseInt(args[1]);

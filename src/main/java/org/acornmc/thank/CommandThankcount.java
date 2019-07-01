@@ -23,10 +23,10 @@ public class CommandThankcount implements CommandExecutor {
         for (String arg : args) {
             if (arg.startsWith("from:")) {
                 from = arg.replace("from:", "");
-                thankerPlayer = Bukkit.getOfflinePlayer(from).getUniqueId().toString().replace("-", "");
+                thankerPlayer = Bukkit.getOfflinePlayer(from).getUniqueId().toString();
             } else if (arg.startsWith("to:")) {
                 to = arg.replace("to:", "");
-                thankeePlayer = Bukkit.getOfflinePlayer(to).getUniqueId().toString().replace("-", "");
+                thankeePlayer = Bukkit.getOfflinePlayer(to).getUniqueId().toString();
             }
         }
         String count = String.valueOf(sqLite.thankcount(thankerPlayer, thankeePlayer));

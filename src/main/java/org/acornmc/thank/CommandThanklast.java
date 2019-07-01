@@ -31,7 +31,7 @@ public class CommandThanklast implements CommandExecutor {
         }
 
         SQLite sqLite = new SQLite(thank);
-        String targetUuid = target.getUniqueId().toString().replace("-","");
+        String targetUuid = target.getUniqueId().toString();
         int thanklast = sqLite.thanklast(targetUuid);
         if (thanklast == 0) {
             sender.sendMessage(plugin.getConfig().getString("ThanklastPlayerNeverThankedMessage").replace("&", "§").replace("%TARGET%", args[0]));
